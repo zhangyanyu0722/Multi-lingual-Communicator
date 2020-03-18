@@ -7,7 +7,7 @@
 ## Product Definition
 
 ### Project Mission
-- We aim to build a WEBRTC peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. After that, we plan to build it in differnet languages, which mean the speaker speak Chinese and the listener can receive the text in English.
+- We aim to build a [Web Real-Time Communication (WebRTC)] peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. After that, we plan to build it in differnet languages, which mean the speaker speak Chinese and the listener can receive the text in English.
 
 ### Target Users
 - The reporter
@@ -24,3 +24,7 @@
 
 ### How it works
 - 
+
+
+
+[Web Real-Time Communication (WebRTC)]:https://webrtc.org/
