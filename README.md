@@ -1,6 +1,7 @@
 # Live Multi-lingual Communication (Team 4)
 
 [![Build Status](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator.svg?branch=master)](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator)
+[![](https://img.shields.io/badge/python-3.6%7C3.7%7C3.8-red)]
 ![Build Status](https://img.shields.io/badge/License-MIT-green)
 
 ## Team Members
