@@ -1,5 +1,7 @@
 # Live Multi-lingual Communication (Team 4)
 
+[![Build Status](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator.svg?branch=master)](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator)
+
 ## Team Members
 - Yanyu Zhang (U47793163) Contact : zhangya@bu.edu
 - Zhou Fang (U03663101)
