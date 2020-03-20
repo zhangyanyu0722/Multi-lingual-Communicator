@@ -1,7 +1,7 @@
 # Live Multi-lingual Communication (Team 4)
 
 [![Build Status](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator.svg?branch=master)](https://travis-ci.org/zhangyanyu0722/Multi-lingual-Communicator)
-[![Build Status](https://img.shields.io/badge/License-MIT-green)]
+![Build Status](https://img.shields.io/badge/License-MIT-green)
 
 ## Team Members
 - Yanyu Zhang (U47793163) Contact : zhangya@bu.edu
