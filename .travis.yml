@@ -1,31 +1,8 @@
-language: node_js 
-
-node_js: "10.16.3"
-
-cache:
-  directories:
-    - node_modules #缓存依赖
-
-
+language: node_js
+node_js:
+    - '12'
 install:
-  - npm install -g npm
-
+    - npm install
 script:
-  - npm run build
-
-after_script:
-  - git clone https://${GH_REF} .temp
-  - cd .temp
-  - git checkout gh-pages
-  - cd ../
-  - mv .temp/.git dist
-  - cd dist
-  - git config user.name "${U_NAME}"
-  - git config user.email "${U_EMAIL}"
-  - git add .
-  - git commit -m ":construction_worker:- Build & Deploy by Travis CI"
-  - git push --force --quiet "https://${Travis_Token}@${GH_REF}" gh-pages:${D_BRANCH}
-
-branches:
-  only:
-    - master
+    - npm run test
+    - npm run lint
