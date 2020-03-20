@@ -1,14 +1,14 @@
-language: node_js #设置语言
+language: node_js 
 
-node_js: "10.16.3" #设置语言版本
+node_js: "10.16.3"
 
 cache:
   directories:
     - node_modules #缓存依赖
 
-# S: Build Lifecycle
+
 install:
-  - npm i
+  - npm install -g npm
 
 script:
   - npm run build
@@ -25,9 +25,7 @@ after_script:
   - git add .
   - git commit -m ":construction_worker:- Build & Deploy by Travis CI"
   - git push --force --quiet "https://${Travis_Token}@${GH_REF}" gh-pages:${D_BRANCH}
-# E: Build LifeCycle
 
-# 只有指定的分支提交时才会运行脚本
 branches:
   only:
     - master
