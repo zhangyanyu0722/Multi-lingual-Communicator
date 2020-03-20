@@ -1,0 +1,32 @@
+language: node_js 
+
+node_js: "10.16.3"
+
+cache:
+  directories:
+    - node_modules 
+
+# S: Build Lifecycle
+install:
+  - npm i
+
+script:
+  - npm run build
+
+after_script:
+  - git clone https://${GH_REF} .temp
+  - cd .temp
+  - git checkout gh-pages
+  - cd ../
+  - mv .temp/.git dist
+  - cd dist
+  - git config user.name "${U_NAME}"
+  - git config user.email "${U_EMAIL}"
+  - git add .
+  - git commit -m ":construction_worker:- Build & Deploy by Travis CI"
+  - git push --force --quiet "https://${Travis_Token}@${GH_REF}" gh-pages:${D_BRANCH}
+# E: Build LifeCycle
+
+branches:
+  only:
+    - master
