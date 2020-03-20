@@ -23,7 +23,9 @@
 - The APP can read the text of what the other person is speaking, and transfer them into other language, like English and Chinese.
 
 ### How it works
-- 
+- Firstly, build a WebRTC application and get the audio and video at the same time.
+- Secondly, use the speech_recognition to transfer audio to text.
+- Thidly, use the google API to translate text into other language.
 
 
 
