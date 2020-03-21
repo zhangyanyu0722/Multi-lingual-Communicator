@@ -31,6 +31,9 @@
 - Secondly, use the speech_recognition to transfer audio to text.
 - Thidly, use the google API to translate text into other language.
 
+## Updates
+- 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
+- 3/21/2020 : Add IBM Watson language translation API, add WebRTC structure.
 
 
 [Web Real-Time Communication (WebRTC)]:https://webrtc.org/
