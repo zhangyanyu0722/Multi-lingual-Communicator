@@ -22,6 +22,10 @@
 - The APP can read the text of what the other person is speaking.
 - The APP can read the text of what the other person is speaking, and transfer them into other language, like English and Chinese.
 
+Optional:
+- Develop APP for five main languages in the world.
+- Build a IOS/Android app and test the performance.
+
 ### How it works
 <p align="middle">
   <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/structure.png">
@@ -30,6 +34,7 @@
 - Firstly, build a WebRTC application and get the audio and video at the same time.
 - Secondly, use the speech_recognition to transfer audio to text.
 - Thidly, use the google API to translate text into other language.
+- Finally, in this way, we can achieve different languages real time communication.
 
 ## Updates
 - 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
