@@ -13,6 +13,8 @@
 ### Project Mission
 - We aim to build a [Web Real-Time Communication (WebRTC)] peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. After that, we plan to build it in differnet languages, which mean the speaker speak Chinese and the listener can receive the text in English.
 
+For more information about WebRTC, [click here]
+
 ### User Stories
 - I, the reporter, want to understand what the different languages speakers say realtime.
 - I, the bussinessman, want to understand what the different languages buyers say realtime.
@@ -45,5 +47,5 @@ Optional:
 
 
 [Web Real-Time Communication (WebRTC)]:https://webrtc.org/
-[Tim Panton]:https://www.youtube.com/watch?v=d7NsiFXcc5A
+[click here]:https://www.youtube.com/watch?v=d7NsiFXcc5A
 [AIORTC]:https://github.com/aiortc/aiortc
