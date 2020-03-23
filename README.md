@@ -16,6 +16,8 @@
 ### User Stories
 - I, the reporter, want to understand what the different languages speakers say realtime.
 - I, the bussinessman, want to understand what the different languages buyers say realtime.
+- I, the student, want to watch the online cources in other languages.
+- I, the politician, want to comminicate with other countries's speaker.
 
 ### MVP
 - Build a WEBRTC peer to peer application.
@@ -39,6 +41,7 @@ Optional:
 ## Updates
 - 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
 - 3/21/2020 : Add IBM Watson language translation API, add WebRTC structure.
+- 3/23/2020 : Add a new method to call google URL based on curl.
 
 
 [Web Real-Time Communication (WebRTC)]:https://webrtc.org/
