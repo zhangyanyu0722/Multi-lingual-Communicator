@@ -14,7 +14,7 @@
 - We aim to build a [Web Real-Time Communication (WebRTC)] peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. After that, we plan to build it in differnet languages, which mean the speaker speak Chinese and the listener can receive the text in English.
 - For more information about WebRTC, [click here]
 <p align="middle">
-  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/logo.jpeg" width="800" height="100" >
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/logo.png" width="800" height="150" >
 </p>
 
 ### User Stories
