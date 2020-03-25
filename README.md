@@ -45,17 +45,17 @@ Optional:
 - In this project, a big challange is to trnaslate one language to another. So I tested 6 different translators : Google NLP API, Google tranlate URL, Youdao translate API, Youdao translate URL, IBM Watson language translation API and Language Translate package from pip.
 - Firstly, I tested the performance of these 6 translators from English to Chinese.
 <p align="middle">
-  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png" width = "600">
 </p>
 <p align="middle">
-  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/3.png">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/3.png" width = "600">
 </p>
 - Secondly, I tested the performance of these 6 translators from Chinese to English.
 <p align="middle">
-  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/2.png">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/2.png" width = "600">
 </p>
 <p align="middle">
-  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/1.png">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/1.png" width = "600">
 </p>
 
 ## Updates
