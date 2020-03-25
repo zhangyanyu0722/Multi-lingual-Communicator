@@ -45,6 +45,7 @@ Optional:
 ## Project Processing
 ### Compare Translators
 - In this project, a big challange is to trnaslate one language to another. So I tested 6 different translators : Google NLP API, Google tranlate URL, Youdao translate API, Youdao translate URL, IBM Watson language translation API and Language Translate package from pip.
+
 - Firstly, I tested the performance of these 6 translators from English to Chinese.
 <p align="middle">
   <img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png" width="400" />
@@ -57,6 +58,10 @@ Optional:
   <img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/1.png" width="400" /> 
 </p>
 
+- After comparison, I found Google Translate API performs best from English to Chinese, Youdao URL and Youdao API have the best performance translating from Chinese to English. But Youdao URL and Youdao API are sensitive to punctuation.
+
+- [Youdao URL] and Youdao API have the same result. But Google API is different to [Google URL].
+
 ## Updates
 - 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
 - 3/21/2020 : Add IBM Watson language translation API, add WebRTC structure.
@@ -67,3 +72,5 @@ Optional:
 [Web Real-Time Communication (WebRTC)]:https://webrtc.org/
 [click here]:https://www.youtube.com/watch?v=d7NsiFXcc5A
 [AIORTC]:https://github.com/aiortc/aiortc
+[Youdao URL]:http://fanyi.youdao.com/
+[Google URL]:https://translate.google.com/
