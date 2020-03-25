@@ -41,6 +41,23 @@ Optional:
 - Thidly, use the google API to translate text into other language.
 - Finally, in this way, we can achieve different languages real time communication.
 
+### Compare Translators
+- In this project, a big challange is to trnaslate one language to another. So I tested 6 different translators : Google NLP API, Google tranlate URL, Youdao translate API, Youdao translate URL, IBM Watson language translation API and Language Translate package from pip.
+- Firstly, I tested the performance of these 6 translators from English to Chinese.
+<p align="middle">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png">
+</p>
+<p align="middle">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/3.png">
+</p>
+- Secondly, I tested the performance of these 6 translators from Chinese to English.
+<p align="middle">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/2.png">
+</p>
+<p align="middle">
+  <img src= "https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/1.png">
+</p>
+
 ## Updates
 - 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
 - 3/21/2020 : Add IBM Watson language translation API, add WebRTC structure.
