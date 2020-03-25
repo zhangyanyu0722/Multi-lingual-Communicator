@@ -48,7 +48,7 @@ Optional:
 - Firstly, I tested the performance of these 6 translators from English to Chinese.
 
 <center class="half">
-    <img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png" width="400"/><img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/3.png" width="400"/>
+    <img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/4.png" width="300"/><img src="https://github.com/zhangyanyu0722/Multi-lingual-Communicator/blob/master/images/3.png" width="300"/>
 </center>
 
 <p align="middle">
