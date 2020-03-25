@@ -11,7 +11,8 @@
 ## Product Definition
 
 ### Project Mission
-- We aim to build a [Web Real-Time Communication (WebRTC)] peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. After that, we plan to build it in differnet languages, which mean the speaker speak Chinese and the listener can receive the text in English.
+- We aim to build a [Web Real-Time Communication (WebRTC)] peer to peer application (video and audio), like simultaneous interpretation. This app can read the text of what the other person is speaking. 
+- After that, we plan to build it in differnet languages(Chinese, English, French, Russian, Arabic, Spanish), which mean the speaker speak one language and the listener can receive the text in another.
 - For more information about WebRTC, [click here]
 
 
@@ -44,6 +45,7 @@ Optional:
 - 3/18/2020 : Add google NLP API, google tranlate URL, Youdao translate API and Youdao translate URL methods to do the text-to-text translation
 - 3/21/2020 : Add IBM Watson language translation API, add WebRTC structure.
 - 3/23/2020 : Add a new method to call google URL based on curl.
+- 3/25/2020 : Compare the performance of different translators.
 
 
 [Web Real-Time Communication (WebRTC)]:https://webrtc.org/
