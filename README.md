@@ -6,7 +6,7 @@
 
 ## Team Members
 - Yanyu Zhang (U47793163) Contact : zhangya@bu.edu
-- Zhou Fang (U03663101)
+- Zhou Fang (U03663101) Contact : fzx2666@bu.edu
 
 ## Product Definition
 
