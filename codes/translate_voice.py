@@ -13,7 +13,7 @@ def translate_voice(source_language, target_language):
 
     url = "https://translation.googleapis.com/language/translate/v2"
     data = {
-        'key':"AIzaSyAAyweygngyKRrUkglrTTq8oDJ4PCWsdYo",
+        'key':"",
         'source': source_language,
         'target': target_language,
         'q': content,
