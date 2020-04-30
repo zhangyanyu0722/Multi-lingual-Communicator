@@ -11,111 +11,89 @@ if (!location.hash) {
     }]
   };
   var mediaRecorder;
+  var count = 0;
+  const name = prompt("What's your name?");
 
   let room;
+  // RTCPeerConnection
   let pc;
-  let chunks = [];
-  var length = 10000;
-  var int;
-  const record = document.querySelector('.record');
-  const stop = document.querySelector('.stop');
-  const soundClips = document.querySelector('.sound-clips');
+  // RTCDataChannel
+  let dataChannel;
 
-  
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  var recognizing = false;
+  var final_transcript = '';
+
+  validCheckAndOpen();
+
   function onError(error) {
     console.error(error);
   };
 
-  
-
   function onSuccess(stream){
-    const mediaRecorder = new MediaRecorder(stream);
-    record.onclick = function() {
-      mediaRecorder.start();
-      console.log(mediaRecorder.state);
-      console.log("recorder started");
-      record.style.background = "red";
+    recognition.start();
+    console.log('Ready for Recognition');
 
-      stop.disabled = false;
-      record.disabled = true;
+    recognition.onstart = function(){
+      recognizing = true;
+      console.log('info_speak_now');
     }
 
-    stop.onclick = function() {
-      mediaRecorder.stop();
-      console.log(mediaRecorder.state);
-      console.log("recorder stopped");
-      record.style.background = "";
-      record.style.color = "";
-      // mediaRecorder.requestData();
-
-      stop.disabled = true;
-      record.disabled = false;
+    recognition.onend = (event) => {
+      recognizing = false;
+      const speechToText = event.results[0][0].transcript;
     }
-    
-    mediaRecorder.onstop = function(e) {
-      console.log("data available after MediaRecorder.stop() called.");
 
-      const clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
-
-      const clipContainer = document.createElement('article');
-      const clipLabel = document.createElement('p');
-      const audio = document.createElement('audio');
-      const deleteButton = document.createElement('button');
-
-      clipContainer.classList.add('clip');
-      audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
-      deleteButton.className = 'delete';
-
-      if(clipName === null) {
-        clipLabel.textContent = 'My unnamed clip';
-      } else {
-        clipLabel.textContent = clipName;
+    recognition.onresult = function(event) {
+      var interim_transcript = '';
+      if (typeof(event.results) == 'undefined') {
+        recognition.onend = null;
+        recognition.stop();
+        console.log('upgrade');
+        return;
       }
-
-      clipContainer.appendChild(audio);
-      clipContainer.appendChild(clipLabel);
-      clipContainer.appendChild(deleteButton);
-      soundClips.appendChild(clipContainer);
-
-      console.log("creating blob");
-      audio.controls = true;
-      const blob = new Blob(chunks, { type: 'video/mp4; "codecs=vp9,opus"' });
-      chunks = [];
-      const audioURL = window.URL.createObjectURL(blob);
-      //audio.src = audioURL;
-      var a = document.createElement('a');
-      document.body.appendChild(a);
-      a.style = 'display: none';
-      a.href = audioURL;
-      a.download = Date.now() + '.mp4';
-      a.click();
-      window.URL.revokeObjectURL(audioURL);
-      console.log("recorder stopped");
-
-      deleteButton.onclick = function(e) {
-        let evtTgt = e.target;
-        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-      }
-
-      clipLabel.onclick = function() {
-        const existingName = clipLabel.textContent;
-        const newClipName = prompt('Enter a new name for your sound clip?');
-        if(newClipName === null) {
-          clipLabel.textContent = existingName;
+      for (var i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          final_transcript += event.results[i][0].transcript;
         } else {
-          clipLabel.textContent = newClipName;
+          interim_transcript += event.results[i][0].transcript;
         }
       }
+      final_transcript = capitalize(final_transcript);
+      final_transcript = linebreak(final_transcript);
+      console.log(final_transcript);
+      //报错有可能是因为不是usvstring
+      //dataChannel.send(final_transcript);
+      console.log(typeof(final_transcript));
+      displaySubscipts();
+      //document.getElementById("left").innerHTML = linebreak(final_transcript);
+    };
+    var first_char = /\S/;
+    function capitalize(s) {
+      return s.replace(first_char, function(m) { return m.toUpperCase(); });
     }
-
-    mediaRecorder.ondataavailable = function(e) {
-      console.log("ondataavailable exed");
-      chunks.push(e.data);
+    var two_line = /\n\n/g;
+    var one_line = /\n/g;
+    function linebreak(s) {
+      return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
     }
   }
-  
-  drone.on('open', error => {
+
+  function displaySubscipts(data,isLocal){
+    let container;
+    if(isLocal){
+      container = document.getElementById('containerleft');
+    } else {
+      container = document.getElementById('containerleft');
+    }
+    container.content.querySelector('.subscripts').innerHTML = data;
+  }
+  //只有当房间里有两个人的时候才运行
+  function validCheckAndOpen(){
+    drone.on('open', error => {
     if (error) {
       return console.error(error);
     }
@@ -134,6 +112,7 @@ if (!location.hash) {
       startWebRTC(isOfferer);
     });
   });
+  }
   
   // Send signaling data via Scaledrone
   function sendMessage(message) {
@@ -142,12 +121,26 @@ if (!location.hash) {
       message
     });
   }
+  //使用json来发送该信息，并表示信息不是自己发出的。
+  //event handler
+  function setupDataChannel() {
+    checkDataChannelState();
+    dataChannel.onopen = checkDataChannelState;
+    dataChannel.onclose = checkDataChannelState;
+    dataChannel.onmessage = event =>
+      insertMessageToDOM(JSON.parse(event.data), false)
+  }
+
+  //检查datachannel是否ready
+  function checkDataChannelState() {
+    console.log('WebRTC channel state is:', dataChannel.readyState);
+    if (dataChannel.readyState === 'open') {
+      insertMessageToDOM({content: 'WebRTC data channel is now open'});
+    }
+  }
   
   function startWebRTC(isOfferer) {
     pc = new RTCPeerConnection(configuration);
-  
-    // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
-    // message to the other peer through the signaling server
     pc.onicecandidate = event => {
       if (event.candidate) {
         sendMessage({'candidate': event.candidate});
@@ -159,23 +152,34 @@ if (!location.hash) {
       pc.onnegotiationneeded = () => {
         pc.createOffer().then(localDescCreated).catch(onError);
       }
+      dataChannel = pc.createDataChannel('subscript');
+      setupDataChannel();
+    } else {
+      // If user is not the offerer let wait for a data channel
+      pc.ondatachannel = event => {
+        dataChannel = event.channel;
+        setupDataChannel();
+      }
     }
+    startMediaTransaction();
   
     // When a remote stream arrives display it in the #remoteVideo element
+  }
+
+  function startMediaTransaction(){
+    //当track事件发生时调用函数，将remotevideo连接到网页上的远程视频位置进行显示
     pc.ontrack = event => {
       const stream = event.streams[0];
       if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
         remoteVideo.srcObject = stream;
       }
     };
-  
+    //获取本地的视频，可能会因为track导致矛盾？
     navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
     }).then(stream => {
-      // Display your local video in #localVideo element
-      localVideo.srcObject = stream;
-      
+      localVideo.srcObject = stream;      
       onSuccess(stream);
       // Add your stream to be sent to the conneting peer
       stream.getTracks().forEach(track => pc.addTrack(track, stream));
