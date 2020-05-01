@@ -12,22 +12,18 @@ if (!location.hash) {
   };
   var mediaRecorder;
   var count = 0;
-  const name = prompt("What's your name?");
 
   let room;
-  // RTCPeerConnection
   let pc;
-  // RTCDataChannel
-  let dataChannel;
-
+  let chunks = [];
+  var length = 10000;
+  var int;
   var recognition = new webkitSpeechRecognition();
   recognition.lang = 'en-US';
   recognition.continuous = true;
   recognition.interimResults = true;
   var recognizing = false;
   var final_transcript = '';
-
-  validCheckAndOpen();
 
   function onError(error) {
     console.error(error);
@@ -63,13 +59,10 @@ if (!location.hash) {
         }
       }
       final_transcript = capitalize(final_transcript);
-      final_transcript = linebreak(final_transcript);
       console.log(final_transcript);
-      //报错有可能是因为不是usvstring
-      //dataChannel.send(final_transcript);
-      console.log(typeof(final_transcript));
-      displaySubscipts();
-      //document.getElementById("left").innerHTML = linebreak(final_transcript);
+      document.getElementById("left").innerHTML = linebreak(final_transcript);
+      //final_span.innerHTML = linebreak(final_transcript);
+      //interim_span.innerHTML = linebreak(interim_transcript);
     };
     var first_char = /\S/;
     function capitalize(s) {
@@ -81,19 +74,8 @@ if (!location.hash) {
       return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
     }
   }
-
-  function displaySubscipts(data,isLocal){
-    let container;
-    if(isLocal){
-      container = document.getElementById('containerleft');
-    } else {
-      container = document.getElementById('containerleft');
-    }
-    container.content.querySelector('.subscripts').innerHTML = data;
-  }
-  //只有当房间里有两个人的时候才运行
-  function validCheckAndOpen(){
-    drone.on('open', error => {
+  
+  drone.on('open', error => {
     if (error) {
       return console.error(error);
     }
@@ -112,7 +94,6 @@ if (!location.hash) {
       startWebRTC(isOfferer);
     });
   });
-  }
   
   // Send signaling data via Scaledrone
   function sendMessage(message) {
@@ -121,26 +102,12 @@ if (!location.hash) {
       message
     });
   }
-  //使用json来发送该信息，并表示信息不是自己发出的。
-  //event handler
-  function setupDataChannel() {
-    checkDataChannelState();
-    dataChannel.onopen = checkDataChannelState;
-    dataChannel.onclose = checkDataChannelState;
-    dataChannel.onmessage = event =>
-      insertMessageToDOM(JSON.parse(event.data), false)
-  }
-
-  //检查datachannel是否ready
-  function checkDataChannelState() {
-    console.log('WebRTC channel state is:', dataChannel.readyState);
-    if (dataChannel.readyState === 'open') {
-      insertMessageToDOM({content: 'WebRTC data channel is now open'});
-    }
-  }
   
   function startWebRTC(isOfferer) {
     pc = new RTCPeerConnection(configuration);
+  
+    // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
+    // message to the other peer through the signaling server
     pc.onicecandidate = event => {
       if (event.candidate) {
         sendMessage({'candidate': event.candidate});
@@ -152,34 +119,22 @@ if (!location.hash) {
       pc.onnegotiationneeded = () => {
         pc.createOffer().then(localDescCreated).catch(onError);
       }
-      dataChannel = pc.createDataChannel('subscript');
-      setupDataChannel();
-    } else {
-      // If user is not the offerer let wait for a data channel
-      pc.ondatachannel = event => {
-        dataChannel = event.channel;
-        setupDataChannel();
-      }
     }
-    startMediaTransaction();
   
     // When a remote stream arrives display it in the #remoteVideo element
-  }
-
-  function startMediaTransaction(){
-    //当track事件发生时调用函数，将remotevideo连接到网页上的远程视频位置进行显示
     pc.ontrack = event => {
       const stream = event.streams[0];
       if (!remoteVideo.srcObject || remoteVideo.srcObject.id !== stream.id) {
         remoteVideo.srcObject = stream;
       }
     };
-    //获取本地的视频，可能会因为track导致矛盾？
+  
     navigator.mediaDevices.getUserMedia({
       audio: true,
       video: true,
     }).then(stream => {
-      localVideo.srcObject = stream;      
+      localVideo.srcObject = stream;
+      
       onSuccess(stream);
       // Add your stream to be sent to the conneting peer
       stream.getTracks().forEach(track => pc.addTrack(track, stream));
